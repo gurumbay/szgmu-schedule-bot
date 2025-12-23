@@ -38,7 +38,7 @@ class DatabaseSettings(ConfigBase):
     @property
     def dsn(self) -> str:
         return (
-            f"postgresql+psycorg://{self.user}:{self.password.get_secret_value()}"
+            f"postgresql+psycopg://{self.user}:{self.password.get_secret_value()}"
             f"@{self.host}:{self.port}/{self.database}"
         )
 

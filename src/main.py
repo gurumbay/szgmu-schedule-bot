@@ -1,5 +1,6 @@
 import asyncio
 import logging
+import sys
 
 
 def setup_logging() -> None:
@@ -16,4 +17,8 @@ async def main() -> None:
 
 
 if __name__ == "__main__":
-    asyncio.run(main())
+    # Fix for Windows + psycopg async
+    if sys.platform == "win32":
+        asyncio.run(main(), loop_factory=asyncio.SelectorEventLoop)
+    else:
+        asyncio.run(main())
